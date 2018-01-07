@@ -4,9 +4,11 @@ import React, { Component } from 'react';
 export default class AppHeader extends Component {
   render(){
     return(
-      <div className='app-header'>
-        I am AppHeader
-      </div>
+      <nav className="navbar navbar-light bg-faded">
+       <div className="container">
+         My App Header
+       </div>
+      </nav>
     );
   }
 }
