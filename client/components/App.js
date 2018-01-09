@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 
+import AppHeader from './app_header';
+import AppFooter from './app_footer';
+import VideoDetail from './video_detail';
 
 export default class App extends Component {
   render(){
     return(
-      <div className="my-css-class">
-        <h1 className="h1">My first page</h1>
+      <div id="app-root">
+        <AppHeader />
+        <VideoDetail />
+        <AppFooter />
       </div>
     );
   }

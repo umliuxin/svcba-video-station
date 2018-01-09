@@ -4,24 +4,36 @@
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const PATH = {
+  SRC: 'client',
+  DIST: 'dist'
+}
+
+
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './client/index.html',
-  filename: 'index.html',
+  template: `./${PATH.SRC}/index.html`,
+  filename: `index.html`,
   inject: 'body'
 })
 
 module.exports = {
-  entry: './client/index.js',
+  entry: `./${PATH.SRC}/index.js`,
   output: {
     path: path.resolve('build'),
-    filename: 'index_bundle.js'
+    filename: `${PATH.DIST}/app_bundle.js`
   },
   module: {
     loaders: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
-    ]
+      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])}
+    ],
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [
+    HtmlWebpackPluginConfig,
+    new ExtractTextPlugin(`${PATH.DIST}/style.bundle.css`)
+  ]
 
 }
