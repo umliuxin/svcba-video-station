@@ -1,2 +1,3 @@
 export const SELECT_VIDEO_ACTION = 'SELECT_VIDEO';
+export const FETCH_VIDEO_ACTION = 'FETCH_VIDEO';
 export const SELECT_TEAM_ACTION = 'SELECT_TEAM';

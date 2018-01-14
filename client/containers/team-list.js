@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectTeam } from '../actions';
+import { selectTeam, fetchVideos } from '../actions';
 import { bindActionCreators } from 'redux';
 
 class TeamList extends Component {
+  constructor(props){
+    super(props);
+    this.onItemClick = this.onItemClick.bind(this);
+  }
+  onItemClick(team){
+    this.props.selectTeam(team);
+    this.props.fetchVideos(team);
+  }
   renderList(){
     return this.props.teams.map((team) => {
       let activeClass;
@@ -12,7 +20,7 @@ class TeamList extends Component {
           <li
             className="team-list-item active"
             key={team.id}
-            onClick={() => this.props.selectTeam(team)}>
+            onClick={this.onItemClick(team)}>
             Name: {team.name}, Image: {team.image}
           </li>
         );
@@ -47,7 +55,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators( {selectTeam}, dispatch);
+  return bindActionCreators( {selectTeam, fetchVideos}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamList);
