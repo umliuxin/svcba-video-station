@@ -8,33 +8,31 @@ class TeamList extends Component {
     super(props);
     this.onItemClick = this.onItemClick.bind(this);
   }
-  onItemClick(team){
+  onItemClick(team = null){
     this.props.selectTeam(team);
     this.props.fetchVideos(team);
   }
   renderList(){
     return this.props.teams.map((team) => {
-      let activeClass;
       if (this.props.selectedTeam && team.id === this.props.selectedTeam.id){
         return (
           <li
             className="team-list-item active"
             key={team.id}
-            onClick={this.onItemClick(team)}>
+            onClick={() => this.onItemClick()}>
             Name: {team.name}, Image: {team.image}
           </li>
         );
-      } else{
+      } else {
         return (
           <li
             className="team-list-item"
             key={team.id}
-            onClick={() => this.props.selectTeam(team)}>
+            onClick={() => this.onItemClick(team)}>
             Name: {team.name}, Image: {team.image}
           </li>
         );
       }
-
     });
   }
 
