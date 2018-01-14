@@ -1,0 +1,1 @@
+export const SELECT_VIDEO_ACTION = 'SELECT_VIDEO';
