@@ -16,21 +16,21 @@ class TeamList extends Component {
     return this.props.teams.map((team) => {
       if (this.props.selectedTeam && team.id === this.props.selectedTeam.id){
         return (
-          <li
-            className="team-list-item active"
+          <div
+            className="team-list-item btn btn-primary active"
             key={team.id}
             onClick={() => this.onItemClick()}>
-            Name: {team.name}, Image: {team.image}
-          </li>
+              Active: {team.name}
+          </div>
         );
       } else {
         return (
-          <li
-            className="team-list-item"
+          <div
+            className="team-list-item btn btn-primary"
             key={team.id}
             onClick={() => this.onItemClick(team)}>
-            Name: {team.name}, Image: {team.image}
-          </li>
+             {team.name}
+          </div>
         );
       }
     });
@@ -38,9 +38,9 @@ class TeamList extends Component {
 
   render(){
     return (
-      <ul className='team-list list-group'>
+      <div className='team-list'>
         {this.renderList()}
-      </ul>
+      </div>
     );
   }
 }

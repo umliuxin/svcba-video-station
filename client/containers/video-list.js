@@ -14,22 +14,23 @@ class VideoList extends Component {
     }
     return this.props.videos.data.map((video) => {
       return (
-        <li
+        <div
           className='video-list-item'
           key={video.id}
           onClick={() => this.props.selectVideo(video)}>
           <div>{video.team_1} vs {video.team_2}</div>
-          <div>{video.gametime}</div>
-        </li>
+          <div>{video.game_day}</div>
+          <div>{video.youtube_id}</div>
+        </div>
       );
     });
   }
 
   render() {
     return (
-      <ul className="list-group">
+      <div className="">
         {this.renderList()}
-      </ul>
+      </div>
     )
   }
 }

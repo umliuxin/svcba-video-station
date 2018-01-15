@@ -8,9 +8,9 @@ class SelectedVideo extends Component {
     }
     return (
       <div>
-        Video ID: {this.props.video.video_id}
-        <br/>
-        {this.props.video.team_home} vs {this.props.video.team_away}
+        Youtube ID: {this.props.video.youtube_id}<br/>
+        Game Day: {this.props.video.game_day}<br/>
+        {this.props.video.team_1} vs {this.props.video.team_2}
       </div>
     );
   }
