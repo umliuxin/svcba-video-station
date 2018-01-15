@@ -6,6 +6,7 @@ import AppFooter from './app_footer';
 
 import TeamList from '../containers/team-list';
 import VideoList from '../containers/video-list';
+import GamedayList from '../containers/gameday-list';
 import SelectedVideo from '../containers/selected-video';
 
 export default class App extends Component {
@@ -16,6 +17,7 @@ export default class App extends Component {
         <SelectedVideo />
         <VideoList />
         <TeamList />
+        <GamedayList />
         <AppFooter />
       </div>
     );
