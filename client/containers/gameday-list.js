@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { fetchVideosByGameday, selectGameday } from '../actions';
+import { selectGameday, fetchVideos } from '../actions';
 import { bindActionCreators } from 'redux';
 
 class GamedayList extends Component {
 
   renderList() {
+    if (!this.props.gamedays){
+      return;
+    }
     return this.props.gamedays.map((gameday) => {
       if (this.props.selectedGameday && gameday === this.props.selectedGameday){
         return (
@@ -13,8 +16,8 @@ class GamedayList extends Component {
             className="btn btn-primary active"
             key={gameday}
             onClick= {()=> {
-              this.props.fetchVideosByGameday();
               this.props.selectGameday();
+              this.props.fetchVideos();
             }}
             >
             Game Day: {gameday}
@@ -26,8 +29,8 @@ class GamedayList extends Component {
             className="btn btn-primary"
             key={gameday}
             onClick= {()=> {
-              this.props.fetchVideosByGameday(gameday);
               this.props.selectGameday(gameday);
+              this.props.fetchVideos();
             }}
             >
             Game Day: {gameday}
@@ -56,7 +59,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchVideosByGameday, selectGameday}, dispatch)
+  return bindActionCreators({selectGameday, fetchVideos}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamedayList)

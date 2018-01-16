@@ -4,6 +4,8 @@ import { API_URL } from '../constants/constants';
 
 import axios from 'axios';
 
+import { store } from '../store';
+
 export function selectVideo(video){
   return {
     type: SELECT_VIDEO_ACTION,
@@ -26,33 +28,14 @@ export function selectGameday(gameday){
 }
 
 export function fetchVideos(){
+  const state = store.getState()
+
   let requestUrl = API_URL;
-  
-  const request = axios.get(requestUrl);
-  return {
-    type: FETCH_VIDEO_ACTION,
-    payload: request
+  if (state.selectedGameday){
+    requestUrl = `${requestUrl}&game_day=${state.selectedGameday}`
   }
-}
-
-export function fetchVideosByGameday(gameday = null){
-  let requestUrl = API_URL;
-
-  if (gameday){
-    requestUrl = `${requestUrl}?game_day=${gameday}`
-  }
-  const request = axios.get(requestUrl);
-  return {
-    type: FETCH_VIDEO_ACTION,
-    payload: request
-  }
-}
-
-export function fetchVideosByTeam(team = null){
-  let requestUrl = API_URL;
-
-  if (team){
-    requestUrl = `${requestUrl}?team=${team.name}`
+  if (state.selectedTeam){
+    requestUrl = `${requestUrl}&team=${state.selectedTeam.name}`
   }
   const request = axios.get(requestUrl);
   return {

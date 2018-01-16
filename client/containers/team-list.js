@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectTeam, fetchVideosByTeam } from '../actions';
+import { selectTeam, fetchVideos } from '../actions';
 import { bindActionCreators } from 'redux';
 
 class TeamList extends Component {
@@ -10,7 +10,6 @@ class TeamList extends Component {
   }
   onItemClick(team = null){
     this.props.selectTeam(team);
-    this.props.fetchVideosByTeam(team);
   }
   renderList(){
     return this.props.teams.map((team) => {
@@ -19,7 +18,10 @@ class TeamList extends Component {
           <div
             className="team-list-item btn btn-primary active"
             key={team.id}
-            onClick={() => this.onItemClick()}>
+            onClick={() => {
+              this.props.selectTeam();
+              this.props.fetchVideos();
+            }}>
               Active: {team.name}
           </div>
         );
@@ -28,7 +30,10 @@ class TeamList extends Component {
           <div
             className="team-list-item btn btn-primary"
             key={team.id}
-            onClick={() => this.onItemClick(team)}>
+            onClick={() => {
+              this.props.selectTeam(team);
+              this.props.fetchVideos();
+            }}>
              {team.name}
           </div>
         );
@@ -53,7 +58,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators( {selectTeam, fetchVideosByTeam}, dispatch);
+  return bindActionCreators( {selectTeam, fetchVideos}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamList);
