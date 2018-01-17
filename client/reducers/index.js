@@ -5,6 +5,7 @@ import GamedaysReducer from './gamedays';
 import SelectedVideoReducer from './selected_video';
 import SelectedTeamReducer from './selected_team';
 import SelectedGamedayReducer from './selected_gameday';
+import videoPromisesReducer from './video_promise';
 
 const rootReducer = combineReducers({
   videos: VideosReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   teams: TeamsReducer,
   selectedTeam: SelectedTeamReducer,
   gamedays: GamedaysReducer,
-  selectedGameday: SelectedGamedayReducer
+  selectedGameday: SelectedGamedayReducer,
+  videoPromises: videoPromisesReducer
 });
 
 export default rootReducer;

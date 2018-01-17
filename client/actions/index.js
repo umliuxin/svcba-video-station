@@ -37,7 +37,12 @@ export function fetchVideos(){
   if (state.selectedTeam){
     requestUrl = `${requestUrl}&team=${state.selectedTeam.name}`
   }
-  const request = axios.get(requestUrl);
+  var request;
+  if (state['videoPromises'][requestUrl]){
+    request = state['videoPromises'][requestUrl];
+  } else {
+    request = axios.get(requestUrl);
+  }
   return {
     type: FETCH_VIDEO_ACTION,
     payload: request
