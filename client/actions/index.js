@@ -29,7 +29,7 @@ export function selectGameday(gameday){
 
 export function fetchVideos(){
   const state = store.getState()
-
+  console.log(state)
   let requestUrl = API_URL;
   if (state.selectedGameday){
     requestUrl = `${requestUrl}&game_day=${state.selectedGameday}`

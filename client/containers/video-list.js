@@ -12,7 +12,7 @@ class VideoList extends Component {
     if (!this.props.videos){
       return <div>Loading</div>;
     }
-    return this.props.videos.data.map((video) => {
+    return this.props.videos.map((video) => {
       return (
         <div
           className='video-list-item'
