@@ -29,13 +29,15 @@ export function selectGameday(gameday){
 
 export function fetchVideos(){
   const state = store.getState()
-  console.log(state)
   let requestUrl = API_URL;
   if (state.selectedGameday){
-    requestUrl = `${requestUrl}&game_day=${state.selectedGameday}`
+    requestUrl = `${requestUrl}&game_day=${state.selectedGameday}`;
   }
   if (state.selectedTeam){
-    requestUrl = `${requestUrl}&team=${state.selectedTeam.name}`
+    requestUrl = `${requestUrl}&team=${state.selectedTeam.name}`;
+  }
+  if (requestUrl == API_URL){
+    requestUrl = `${requestUrl}&limit=15`;
   }
   var request;
   if (state['videoPromises'][requestUrl]){
