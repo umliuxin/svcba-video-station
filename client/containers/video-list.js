@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectVideo } from '../actions';
+import { selectVideo, fetchVideos } from '../actions';
 import { bindActionCreators } from 'redux';
 
 class VideoList extends Component {
 
+  componentDidMount(){
+    this.props.fetchVideos();
+  }
   renderList() {
+    if (!this.props.videos){
+      return <div>Loading</div>;
+    }
     return this.props.videos.map((video) => {
       return (
-        <li
+        <div
           className='video-list-item'
-          key={video.video_id}
-          onClick={() => this.props.selectVideo(video)}> 
-          {video.team_home} vs {video.team_away}
-        </li>
+          key={video.id}
+          onClick={() => this.props.selectVideo(video)}>
+          <div>{video.team_1} vs {video.team_2}</div>
+          <div>{video.game_day}</div>
+          <div>{video.youtube_id}</div>
+        </div>
       );
     });
   }
 
   render() {
     return (
-      <ul className="list-group">
+      <div className="">
         {this.renderList()}
-      </ul>
+      </div>
     )
   }
 }
@@ -34,7 +42,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators( {selectVideo}, dispatch);
+  return bindActionCreators( {selectVideo, fetchVideos}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoList);

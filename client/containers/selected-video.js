@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { YOUTUBE_BASE_URL } from '../constants/constants';
 
 class SelectedVideo extends Component {
   render(){
@@ -7,10 +8,14 @@ class SelectedVideo extends Component {
       return <div>No Video Selected</div>;
     }
     return (
-      <div>
-        Video ID: {this.props.video.video_id}
-        <br/>
-        {this.props.video.team_home} vs {this.props.video.team_away}
+      <div className="c_video-detial">
+        <div className="embed-responsive embed-responsive-16by9">
+          <iframe className="embed-responsive-item" src={`${YOUTUBE_BASE_URL}${this.props.video.youtube_id}`}></iframe>
+        </div>
+        <div>
+          Game Day: {this.props.video.game_day}<br/>
+          {this.props.video.team_1} vs {this.props.video.team_2}
+        </div>
       </div>
     );
   }
