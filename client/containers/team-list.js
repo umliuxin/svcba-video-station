@@ -12,7 +12,8 @@ class TeamList extends Component {
     this.props.selectTeam(team);
   }
   renderList(){
-    return this.props.teams.map((team) => {
+    return Object.keys(this.props.teams).map((key) => {
+      let team = this.props.teams[key];
       if (this.props.selectedTeam && team.id === this.props.selectedTeam.id){
         return (
           <div
