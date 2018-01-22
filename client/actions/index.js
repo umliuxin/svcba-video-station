@@ -1,4 +1,4 @@
-import { SELECT_VIDEO_ACTION, SELECT_TEAM_ACTION, SELECT_GAMEDAY_ACTION, FETCH_VIDEO_ACTION } from '../constants/actions';
+import { SELECT_VIDEO_ACTION, SELECT_TEAM_ACTION, SELECT_GAMEDAY_ACTION, FETCH_VIDEOS_ACTION, FETCH_VIDEO_ACTION } from '../constants/actions';
 
 import { API_URL } from '../constants/constants';
 
@@ -27,6 +27,15 @@ export function selectGameday(gameday){
   }
 }
 
+export function fetchVideo(vid){
+  let requestUrl = `${API_URL}&vid=${vid}`;
+  let request = axios.get(requestUrl);
+  return {
+    type: FETCH_VIDEO_ACTION,
+    payload: request
+  }
+}
+
 export function fetchVideos(){
   const state = store.getState()
   let requestUrl = API_URL;
@@ -46,7 +55,7 @@ export function fetchVideos(){
     request = axios.get(requestUrl);
   }
   return {
-    type: FETCH_VIDEO_ACTION,
+    type: FETCH_VIDEOS_ACTION,
     payload: request
   }
 }
