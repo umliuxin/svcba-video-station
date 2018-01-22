@@ -6,9 +6,7 @@ import { bindActionCreators } from 'redux';
 class GamedayList extends Component {
 
   renderList() {
-    if (!this.props.gamedays){
-      return;
-    }
+    if (!this.props.gamedays){ return; }
     return this.props.gamedays.map((gameday) => {
       if (this.props.selectedGameday && gameday === this.props.selectedGameday){
         return (
@@ -18,10 +16,7 @@ class GamedayList extends Component {
             onClick= {()=> {
               this.props.selectGameday();
               this.props.fetchVideos();
-            }}
-            >
-            Game Day: {gameday}
-          </div>
+            }}>Game Day: {gameday}</div>
         );
       } else {
         return (
@@ -31,15 +26,10 @@ class GamedayList extends Component {
             onClick= {()=> {
               this.props.selectGameday(gameday);
               this.props.fetchVideos();
-            }}
-            >
-            Game Day: {gameday}
-          </div>
+            }}>Game Day: {gameday}</div>
         );
       }
-
     });
-
   }
 
   render() {

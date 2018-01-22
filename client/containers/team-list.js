@@ -22,9 +22,7 @@ class TeamList extends Component {
             onClick={() => {
               this.props.selectTeam();
               this.props.fetchVideos();
-            }}>
-              Active: {team.name}
-          </div>
+            }}>Active: {team.name}</div>
         );
       } else {
         return (
@@ -34,9 +32,7 @@ class TeamList extends Component {
             onClick={() => {
               this.props.selectTeam(team);
               this.props.fetchVideos();
-            }}>
-             {team.name}
-          </div>
+            }}>{team.name}</div>
         );
       }
     });
