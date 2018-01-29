@@ -1,4 +1,10 @@
-import { SELECT_VIDEO_ACTION, SELECT_TEAM_ACTION, SELECT_GAMEDAY_ACTION, FETCH_VIDEOS_ACTION, FETCH_VIDEO_ACTION } from '../constants/actions';
+import {
+  SELECT_VIDEO_ACTION,
+  SELECT_TEAM_ACTION,
+  SELECT_GAMEDAY_ACTION,
+  FETCH_VIDEOS_ACTION,
+  FETCH_VIDEO_ACTION,
+  SHOW_SHARE_ACTION } from '../constants/actions';
 
 import { API_URL } from '../constants/constants';
 
@@ -57,5 +63,12 @@ export function fetchVideos(){
   return {
     type: FETCH_VIDEOS_ACTION,
     payload: request
+  }
+}
+
+export function showShareLink(bool){
+  return {
+    type: SHOW_SHARE_ACTION,
+    payload: bool
   }
 }
