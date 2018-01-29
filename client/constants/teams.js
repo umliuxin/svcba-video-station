@@ -26,5 +26,9 @@ export const TEAM_LIST = {
   "江湖":{"name":"江湖","id":24,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1010072/75/75/c/1502749364.png"},
   "老司机":{"name":"老司机","id":25,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/905734/75/75/c/1441189061.jpg"},
   "西南某队":{"name":"西南某队","id":26,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1008331/75/75/c/1467051767.jpg"},
-  "野":{"name":"野","id":27,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1010212/75/75/c/1504849791.png"}
+  "野":{"name":"野","id":27,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1010212/75/75/c/1504849791.png"},
+  "Pretty Women":{"name":"Pretty Women","id":28,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1010214/75/75/c/1504429374.jpg"},
+  "老A战队":{"name":"老A战队","id":29,"image":"http://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-basketball.png&w=288&h=288&transparent=true"},
+  "蓝鲸队":{"name":"蓝鲸队","id":30,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1010216/75/75/c/1504760864.jpg"},
+  "辣妈天团":{"name":"辣妈天团","id":31,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1010213/75/75/c/1504415654.jpg"}
 }
