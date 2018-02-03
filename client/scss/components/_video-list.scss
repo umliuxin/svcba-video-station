@@ -1,0 +1,39 @@
+.c_video-list{
+
+}
+
+
+.c_video-list-item{
+  .item-wrap{
+    background-color: $gray-lighter;
+    padding: 16px 20%;
+    text-align: center;
+    position: relative;
+    margin-bottom: 16px;
+    cursor: pointer;
+  }
+  .team-1-logo, .team-2-logo {
+    position: absolute;
+    height: 100%;
+    width: 20%;
+    z-index: 1;
+    top: 0;
+    overflow: hidden;
+    background-color: #fff;
+    img{
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+  }
+  .team-1-logo{
+    left: 0;
+  }
+
+  .team-2-logo{
+    right: 0;
+  }
+}

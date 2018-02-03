@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { selectVideo, fetchVideos } from '../actions';
 import { bindActionCreators } from 'redux';
 
+import { fetchTeamLogo } from '../utility';
+
 class VideoList extends Component {
 
   componentDidMount(){
@@ -15,29 +17,66 @@ class VideoList extends Component {
     return this.props.videos.map((video) => {
       return (
         <div
-          className='video-list-item'
+          className='c_video-list-item col-sm-6'
           key={video.id}
           onClick={() => this.props.selectVideo(video)}>
-          <div>{video.team_1} vs {video.team_2}</div>
-          <div>{video.game_day}</div>
-          <div>{video.youtube_id}</div>
+          <div className="item-wrap">
+            <div>{video.team_1} vs {video.team_2}</div>
+            <div>{video.game_day}</div>
+            <div className="team-1-logo">
+              <img src={fetchTeamLogo(video.team_1)}/>
+            </div>
+            <div className="team-2-logo">
+              <img src={fetchTeamLogo(video.team_2)}/>
+            </div>
+          </div>
         </div>
       );
     });
   }
 
+  renderTitle() {
+    if (!this.props.videos){
+      return '';
+    }
+    if (this.props.selectedTeam && this.props.selectedGameday){
+      return (
+        <span>{this.props.selectedTeam.name} Game on {this.props.selectedGameday}</span>
+      );
+    } else if (this.props.selectedTeam) {
+      return (
+        <span>All Games from {this.props.selectedTeam.name}</span>
+      );
+    } else if (this.props.selectedGameday) {
+      return (
+        <span>All Games on {this.props.selectedGameday}</span>
+      );
+    } else {
+      return ( <span>Recommended</span> );
+    }
+  }
+
   render() {
     return (
-      <div className="">
-        {this.renderList()}
+      <div className="c_video-list">
+        <div className="container">
+          <h2 className="comp-title">{this.renderTitle()}</h2>
+          <div className="row">
+            {this.renderList()}
+          </div>
+        </div>
       </div>
     )
   }
+
 }
+
 
 function mapStateToProps(state) {
   return {
-    videos: state.videos
+    videos: state.videos,
+    selectedTeam: state.selectedTeam,
+    selectedGameday: state.selectedGameday
   };
 }
 

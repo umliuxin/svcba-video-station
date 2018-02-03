@@ -20,7 +20,7 @@ class SelectedVideo extends Component {
   }
   render(){
     if (!this.props.video){
-      return <div>No Video Selected</div>;
+      return '';
     }
     return (
       <div className="c_video-detial">

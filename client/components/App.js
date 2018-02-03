@@ -15,8 +15,10 @@ export default class App extends Component {
     return(
       <div id="app-root">
         <AppHeader />
-        <SelectedVideo />
-        <ShareLink />
+        <div>
+          <SelectedVideo />
+          <ShareLink />
+        </div>
         <VideoList />
         <TeamList />
         <GamedayList />
