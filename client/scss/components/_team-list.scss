@@ -1,0 +1,48 @@
+.c_team-list-item{
+  text-align: center;
+  position: relative;
+  margin-bottom: 16px;
+  padding: 0 8px;
+  cursor: pointer;
+  .wrap{
+    height: 0;
+    padding-bottom: 80%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: $gray-lighter;
+  }
+  img{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .text-wrap{
+    position: absolute;
+    bottom: 0px;
+    top: 0px;
+    left: 0;
+    right: 0;
+    @include gradient-y-three-colors($start-color: rgba($gray-lighter, 0.3), $mid-color: rgba($gray-dark, 0.8), $color-stop: 75%, $end-color: rgba($gray-dark, 0.7));
+    div{
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 75%;
+      color: #fff;
+      font-size: 20px;
+      transform: translateY(-50%);
+    }
+  }
+  &.active{
+    .text-wrap{
+      background-image: none;
+      border: 6px solid $green;
+      div{
+        color:transparent;
+      }
+    }
+  }
+}
