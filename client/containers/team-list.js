@@ -50,18 +50,27 @@ class TeamList extends Component {
   renderList(group = 'all'){
     return Object.keys(this.props.teams)
       .filter(key => {
+        return !this.props.selectedTeam || this.props.teams[key].id !== this.props.selectedTeam.id
+
+      })
+      .filter(key => {
         if (group == "all") return true;
         return this.props.teams[key].group === group;
       })
       .map(key => {
       let team = this.props.teams[key];
-      return this.renderListItem(team, this.props.selectedTeam && team.id === this.props.selectedTeam.id);
+      return this.renderListItem(team, false);
     });
   }
   renderSelected(){
     if (!this.props.selectedTeam) return '';
     return (
-      <h4>SELECTED</h4>
+      <div>
+        <h4>SELECTED</h4>
+        <div>
+          {this.renderListItem(this.props.selectedTeam, true)}
+        </div>
+      </div>
     );
   }
 
