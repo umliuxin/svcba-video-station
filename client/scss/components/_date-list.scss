@@ -1,0 +1,25 @@
+.c_gameday-item{
+  padding: 18px 32px 48px;
+  display: inline-block;
+  text-align: center;
+  background-image: url("../../images/gameday-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-right: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  .btn{
+    font-size: $font-size-lg;
+    padding: 0;
+    background-color: transparent;
+    color: #fff;
+    cursor: inherit;
+  }
+}
+
+.c_gameday-list{
+  .selected-row{
+    margin-bottom: 24px;
+  }
+}

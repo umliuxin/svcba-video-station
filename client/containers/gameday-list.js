@@ -5,37 +5,67 @@ import { bindActionCreators } from 'redux';
 
 class GamedayList extends Component {
 
-  renderList() {
-    if (!this.props.gamedays){ return; }
-    return this.props.gamedays.map((gameday) => {
-      if (this.props.selectedGameday && gameday === this.props.selectedGameday){
-        return (
-          <div
-            className="btn btn-primary active"
-            key={gameday}
+  renderListItem(gameday, isActive) {
+    if (isActive){
+      return (
+        <div className="c_gameday-item active" key={gameday}>
+          <button
+            className="btn"
             onClick= {()=> {
               this.props.selectGameday();
               this.props.fetchVideos();
-            }}>Game Day: {gameday}</div>
-        );
-      } else {
-        return (
-          <div
-            className="btn btn-primary"
-            key={gameday}
+            }}>
+              {gameday}
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="c_gameday-item" key={gameday}>
+          <button
+            className="btn"
             onClick= {()=> {
               this.props.selectGameday(gameday);
               this.props.fetchVideos();
-            }}>Game Day: {gameday}</div>
-        );
-      }
-    });
+            }}>
+              {gameday}
+          </button>
+        </div>
+      );
+    }
+  }
+
+  renderList() {
+    if (!this.props.gamedays){ return; }
+    return this.props.gamedays
+      .filter(gameday => {
+        return this.props.selectedGameday !== gameday;
+      })
+      .map((gameday) => {
+        return this.renderListItem(gameday, false);
+      });
+  }
+
+  renderSelected() {
+    if (!this.props.selectedGameday) return '';
+    return (
+      <div className="selected-row">
+        <h4>SELECTED</h4>
+        <div>
+          {this.renderListItem(this.props.selectedGameday, true)}
+        </div>
+      </div>
+    );
   }
 
   render() {
     return(
-      <div className="gameday-list">
-        {this.renderList()}
+      <div className="c_gameday-list">
+        <div className='container'>
+          <h2 className="comp-title">Filter by game day</h2>
+          {this.renderSelected()}
+          {this.renderList()}
+        </div>
       </div>
     );
   }
