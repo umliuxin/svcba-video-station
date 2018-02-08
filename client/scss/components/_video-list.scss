@@ -1,5 +1,21 @@
 .c_video-list{
-
+  .applied-filter{
+    margin-bottom: 24px;
+  }
+  .applied-item{
+    padding: 8px 32px 8px 16px;
+    border-radius: 4px;
+    border: 1px solid $gray-lighter;
+    display: inline-block;
+    position: relative;
+    margin-right: 8px;
+    cursor: pointer;
+    &:after{
+      content: 'x';
+      position: absolute;
+      right: 8px;
+    }
+  }
 }
 
 

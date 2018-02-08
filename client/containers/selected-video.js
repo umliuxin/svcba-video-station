@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { fetchVideo, showShareLink } from '../actions';
 import { YOUTUBE_BASE_URL } from '../constants/constants';
 
+import { fetchTeamLogo } from '../utility';
+
 class SelectedVideo extends Component {
   constructor(props){
     super(props);
@@ -22,15 +24,29 @@ class SelectedVideo extends Component {
     if (!this.props.video){
       return '';
     }
+    console.log(this.props.video)
     return (
-      <div className="c_video-detial">
-        <div className="embed-responsive embed-responsive-16by9">
-          <iframe className="embed-responsive-item" src={`${YOUTUBE_BASE_URL}${this.props.video.youtube_id}`}></iframe>
-        </div>
-        <div>
-          Game Day: {this.props.video.game_day}<br/>
-          {this.props.video.team_1} vs {this.props.video.team_2}
-          <div><button className="btn btn-primary" onClick={this.shareOnClick}>Share</button></div>
+      <div className="c_video-detail">
+        <div className="container">
+          <div className="video-meta">
+            <div className="team-1-logo">
+              <div className="team-name">
+                {this.props.video.team_1}
+              </div>
+              <img src={fetchTeamLogo(this.props.video.team_1)}/>
+            </div>
+            <div className="team-2-logo">
+              <div className="team-name">
+                {this.props.video.team_2}
+              </div>
+              <img src={fetchTeamLogo(this.props.video.team_2)}/>
+            </div>
+            <div className="video-date">{this.props.video.gametime}</div>
+            <div className="share-button"><button className="btn btn-primary" onClick={this.shareOnClick}>Share</button></div>
+          </div>
+          <div className="embed-responsive embed-responsive-16by9">
+            <iframe className="embed-responsive-item" src={`${YOUTUBE_BASE_URL}${this.props.video.youtube_id}`}></iframe>
+          </div>
         </div>
       </div>
     );

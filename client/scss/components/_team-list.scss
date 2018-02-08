@@ -37,9 +37,14 @@
     }
   }
   &.active{
+    .wrap{
+
+      box-shadow: 4px 4px 2px rgba(0,0,0,0.5);
+    }
     .text-wrap{
       background-image: none;
-      border: 6px solid $green;
+      border: 1px solid $gray;
+      border-radius: 8px;
       div{
         color:transparent;
       }

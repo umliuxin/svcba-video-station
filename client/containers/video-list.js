@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectVideo, fetchVideos } from '../actions';
+import { selectVideo, fetchVideos, selectTeam, selectGameday } from '../actions';
 import { bindActionCreators } from 'redux';
 
 import { fetchTeamLogo } from '../utility';
@@ -55,12 +55,35 @@ class VideoList extends Component {
       return ( <span>Recommended</span> );
     }
   }
+  renderApplied() {
+    if (this.props.selectedTeam && this.props.selectedGameday){
+      return (
+        <div>
+          <div className="applied-item" onClick = {() => {this.props.selectTeam()}}>{this.props.selectedTeam.name}</div>
+          <div className="applied-item" onClick = {() => {this.props.selectGameday()}}>{this.props.selectedGameday}</div>
+        </div>
+      );
+    } else if (this.props.selectedTeam) {
+      return (
+        <div className="applied-item" onClick = {() => {this.props.selectTeam()}}>{this.props.selectedTeam.name}</div>
+      );
+    } else if (this.props.selectedGameday) {
+      return (
+        <div className="applied-item" onClick = {() => {this.props.selectGameday()}}>{this.props.selectedGameday}</div>
+      );
+    } else {
+      return '';
+    }
+  }
 
   render() {
     return (
       <div className="c_video-list">
         <div className="container">
           <h2 className="comp-title">{this.renderTitle()}</h2>
+          <div className="applied-filter">
+            {this.renderApplied()}
+          </div>
           <div className="row">
             {this.renderList()}
           </div>
@@ -81,7 +104,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators( {selectVideo, fetchVideos}, dispatch);
+  return bindActionCreators( {selectVideo, fetchVideos, selectTeam, selectGameday}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoList);

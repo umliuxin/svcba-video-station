@@ -8,26 +8,22 @@ class GamedayList extends Component {
   renderListItem(gameday, isActive) {
     if (isActive){
       return (
-        <div className="c_gameday-item active" key={gameday}>
-          <button
-            className="btn"
-            onClick= {()=> {
-              this.props.selectGameday();
-              this.props.fetchVideos();
-            }}>
-              {gameday}
+        <div className="c_gameday-item active" key={gameday} onClick= {()=> {
+          this.props.selectGameday();
+          this.props.fetchVideos();
+        }}>
+          <button className="btn">
+              <strong>{gameday}</strong>
           </button>
         </div>
       );
     } else {
       return (
-        <div className="c_gameday-item" key={gameday}>
-          <button
-            className="btn"
-            onClick= {()=> {
-              this.props.selectGameday(gameday);
-              this.props.fetchVideos();
-            }}>
+        <div className="c_gameday-item" key={gameday} onClick= {()=> {
+          this.props.selectGameday(gameday);
+          this.props.fetchVideos();
+        }}>
+          <button className="btn">
               {gameday}
           </button>
         </div>
@@ -38,24 +34,9 @@ class GamedayList extends Component {
   renderList() {
     if (!this.props.gamedays){ return; }
     return this.props.gamedays
-      .filter(gameday => {
-        return this.props.selectedGameday !== gameday;
-      })
       .map((gameday) => {
-        return this.renderListItem(gameday, false);
+        return this.renderListItem(gameday, this.props.selectedGameday === gameday);
       });
-  }
-
-  renderSelected() {
-    if (!this.props.selectedGameday) return '';
-    return (
-      <div className="selected-row">
-        <h4>SELECTED</h4>
-        <div>
-          {this.renderListItem(this.props.selectedGameday, true)}
-        </div>
-      </div>
-    );
   }
 
   render() {
@@ -63,7 +44,6 @@ class GamedayList extends Component {
       <div className="c_gameday-list">
         <div className='container'>
           <h2 className="comp-title">Filter by game day</h2>
-          {this.renderSelected()}
           {this.renderList()}
         </div>
       </div>

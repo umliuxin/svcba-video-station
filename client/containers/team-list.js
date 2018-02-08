@@ -50,28 +50,13 @@ class TeamList extends Component {
   renderList(group = 'all'){
     return Object.keys(this.props.teams)
       .filter(key => {
-        return !this.props.selectedTeam || this.props.teams[key].id !== this.props.selectedTeam.id
-
-      })
-      .filter(key => {
         if (group == "all") return true;
         return this.props.teams[key].group === group;
       })
       .map(key => {
       let team = this.props.teams[key];
-      return this.renderListItem(team, false);
+      return this.renderListItem(team, this.props.selectedTeam && team.id === this.props.selectedTeam.id);
     });
-  }
-  renderSelected(){
-    if (!this.props.selectedTeam) return '';
-    return (
-      <div>
-        <h4>SELECTED</h4>
-        <div>
-          {this.renderListItem(this.props.selectedTeam, true)}
-        </div>
-      </div>
-    );
   }
 
   render(){
@@ -79,7 +64,6 @@ class TeamList extends Component {
       <div className='c_team-list'>
         <div className='container'>
           <h2 className="comp-title">Filter by team</h2>
-          {this.renderSelected()}
           <h4> MEN Group</h4>
           <div className="row">
             {this.renderList(GROUP_MEN)}

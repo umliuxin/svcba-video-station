@@ -8,7 +8,7 @@ export default class AppHeader extends Component {
     return(
       <nav className="c_app-header navbar">
        <div className="container">
-         <img src={appLogo} className="img-app-logo"/>
+         <a href={window.location.origin}><img src={appLogo} className="img-app-logo"/></a>
          <span className="app-title">SVCBA Video Station</span>
        </div>
       </nav>
