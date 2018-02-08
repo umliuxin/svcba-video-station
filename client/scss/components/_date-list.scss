@@ -5,7 +5,7 @@
   background-image: url("../../images/gameday-bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  margin-right: 8px;
+  margin-right: 12px;
   border-radius: 6px;
   cursor: pointer;
 
@@ -18,7 +18,7 @@
   }
 
   &.active{
-    box-shadow: 4px 4px 2px rgba(0,0,0,0.5);
+    box-shadow: 0 0 4px 2px rgba(0,0,0,0.5);
   }
 }
 

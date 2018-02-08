@@ -14,8 +14,9 @@
     bottom: 0;
     width: 50%;
     overflow: hidden;
+    border-radius: 12px;
     img{
-      width: 130%;
+      width: 120%;
       height: auto;
       top: 50%;
       left: 50%;
@@ -25,7 +26,7 @@
     }
     .team-name{
       position: absolute;
-      top: 60%;
+      top: 50%;
       font-size: 50px;
       color: #fff;
       z-index: 2;
@@ -35,14 +36,14 @@
   .team-1-logo{
     left: 0;
     .team-name{
-      left: 35%;
+      left: 60%;
       transform: translate(-50%, -50%);
     }
   }
   .team-2-logo{
     right: 0;
     .team-name{
-      right: 35%;
+      right: 60%;
       transform: translate(50%, -50%);
     }
   }

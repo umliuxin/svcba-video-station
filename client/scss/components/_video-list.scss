@@ -20,22 +20,30 @@
 
 
 .c_video-list-item{
+  padding: 0 10px;
   .item-wrap{
     background-color: $gray-lighter;
-    padding: 16px 20%;
     text-align: center;
-    position: relative;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  }
+  .image-wrap{
+    width: 100%;
+    padding-bottom: 45%;
+    height: 0;
+    position: relative;
   }
   .team-1-logo, .team-2-logo {
     position: absolute;
     height: 100%;
-    width: 20%;
+    width: 50%;
     z-index: 1;
     top: 0;
     overflow: hidden;
     background-color: #fff;
+
     img{
       width: 100%;
       height: auto;
@@ -47,9 +55,11 @@
   }
   .team-1-logo{
     left: 0;
+    border-top-left-radius: 8px;
   }
 
   .team-2-logo{
     right: 0;
+    border-top-right-radius: 8px;
   }
 }

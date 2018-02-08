@@ -17,18 +17,21 @@ class VideoList extends Component {
     return this.props.videos.map((video) => {
       return (
         <div
-          className='c_video-list-item col-sm-6'
+          className='c_video-list-item col-sm-3'
           key={video.id}
           onClick={() => this.props.selectVideo(video)}>
           <div className="item-wrap">
+            <div className="image-wrap">
+              <div className="team-1-logo">
+                <img src={fetchTeamLogo(video.team_1)}/>
+              </div>
+              <div className="team-2-logo">
+                <img src={fetchTeamLogo(video.team_2)}/>
+              </div>
+            </div>
             <div>{video.team_1} vs {video.team_2}</div>
             <div>{video.game_day}</div>
-            <div className="team-1-logo">
-              <img src={fetchTeamLogo(video.team_1)}/>
-            </div>
-            <div className="team-2-logo">
-              <img src={fetchTeamLogo(video.team_2)}/>
-            </div>
+
           </div>
         </div>
       );
