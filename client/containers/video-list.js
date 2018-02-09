@@ -8,33 +8,36 @@ import { fetchTeamLogo } from '../utility';
 class VideoList extends Component {
 
   componentDidMount(){
-    this.props.fetchVideos();
+    this.props.fetchVideos({indexVideos: true});
   }
-  renderList() {
-    if (!this.props.videos){
-      return <div>Loading</div>;
-    }
-    return this.props.videos.map((video) => {
-      return (
-        <div
-          className='c_video-list-item col-sm-3'
-          key={video.id}
-          onClick={() => this.props.selectVideo(video)}>
-          <div className="item-wrap">
-            <div className="image-wrap">
-              <div className="team-1-logo">
-                <img src={fetchTeamLogo(video.team_1)}/>
-              </div>
-              <div className="team-2-logo">
-                <img src={fetchTeamLogo(video.team_2)}/>
-              </div>
+  renderItem(video) {
+    return (
+      <div
+        className='c_video-list-item col-sm-3'
+        key={video.id}
+        onClick={() => {
+          this.props.selectVideo(video);
+          this.props.fetchVideos({selectedVideo: video})
+        }}>
+        <div className="item-wrap">
+          <div className="image-wrap">
+            <div className="team-1-logo">
+              <img src={fetchTeamLogo(video.team_1)}/>
             </div>
-            <div>{video.team_1} vs {video.team_2}</div>
-            <div>{video.game_day}</div>
-
+            <div className="team-2-logo">
+              <img src={fetchTeamLogo(video.team_2)}/>
+            </div>
           </div>
+          <div>{video.team_1} vs {video.team_2}</div>
+          <div>{video.game_day}</div>
+
         </div>
-      );
+      </div>
+    );
+  }
+  renderList(videos) {
+    return videos.map((video) => {
+      return this.renderItem(video);
     });
   }
 
@@ -58,41 +61,91 @@ class VideoList extends Component {
       return ( <span>Recommended</span> );
     }
   }
+
   renderApplied() {
     if (this.props.selectedTeam && this.props.selectedGameday){
       return (
         <div>
-          <div className="applied-item" onClick = {() => {this.props.selectTeam()}}>{this.props.selectedTeam.name}</div>
-          <div className="applied-item" onClick = {() => {this.props.selectGameday()}}>{this.props.selectedGameday}</div>
+          <div className="applied-item" onClick = {()=>{
+              this.props.selectTeam();
+              this.props.fetchVideos({selectedGameday: this.props.selectedGameday, selectedTeam: null});
+            }}>{this.props.selectedTeam.name}</div>
+          <div className="applied-item" onClick = {()=>{
+              this.props.selectGameday();
+              this.props.fetchVideos({selectedGameday: null, selectedTeam: this.props.selectedTeam});
+            }}>{this.props.selectedGameday}</div>
         </div>
       );
     } else if (this.props.selectedTeam) {
       return (
-        <div className="applied-item" onClick = {() => {this.props.selectTeam()}}>{this.props.selectedTeam.name}</div>
+        <div className="applied-item" onClick = {()=>{
+            this.props.selectTeam();
+            this.props.fetchVideos({selectedGameday: this.props.selectedGameday, selectedTeam: null});
+          }}>{this.props.selectedTeam.name}</div>
       );
     } else if (this.props.selectedGameday) {
       return (
-        <div className="applied-item" onClick = {() => {this.props.selectGameday()}}>{this.props.selectedGameday}</div>
+        <div className="applied-item" onClick = {()=>{
+            this.props.selectGameday();
+            this.props.fetchVideos({selectedGameday: null, selectedTeam: this.props.selectedTeam});
+          }}>{this.props.selectedGameday}</div>
       );
     } else {
       return '';
     }
   }
 
-  render() {
+
+  renderRecommend() {
     return (
-      <div className="c_video-list">
-        <div className="container">
-          <h2 className="comp-title">{this.renderTitle()}</h2>
-          <div className="applied-filter">
-            {this.renderApplied()}
-          </div>
-          <div className="row">
-            {this.renderList()}
-          </div>
+      <div className="container">
+        <h4>Other games from {this.props.videos.team_1_name}</h4>
+        <div className="row">
+          {this.renderList(this.props.videos.team_1_videos)}
+        </div>
+        <h4>Other games from {this.props.videos.team_2_name}</h4>
+        <div className="row">
+          {this.renderList(this.props.videos.team_2_videos)}
+        </div>
+        <h4>Other games from {this.props.videos.game_day_name}</h4>
+        <div className="row">
+          {this.renderList(this.props.videos.game_day_videos)}
         </div>
       </div>
-    )
+    );
+  }
+
+  render() {
+    if (this.props.videos){
+      if(Array.isArray(this.props.videos)) {
+        return (
+          <div className="c_video-list">
+            <div className="container">
+              <h2 className="comp-title">{this.renderTitle()}</h2>
+              <div className="applied-filter">
+                {this.renderApplied()}
+              </div>
+              <div className="row">
+                {this.renderList(this.props.videos)}
+              </div>
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div className="c_video-list">
+            {this.renderRecommend()}
+          </div>
+        );
+      }
+    } else {
+      return (
+        <div className="text-center">
+          Loading
+        </div>
+      )
+    }
+
   }
 
 }
@@ -101,8 +154,9 @@ class VideoList extends Component {
 function mapStateToProps(state) {
   return {
     videos: state.videos,
+    selectedGameday: state.selectedGameday,
     selectedTeam: state.selectedTeam,
-    selectedGameday: state.selectedGameday
+    selectedVideo: state.selectedVideo
   };
 }
 

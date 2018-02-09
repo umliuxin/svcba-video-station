@@ -21,7 +21,7 @@ class TeamList extends Component {
           key={team.id}
           onClick={() => {
             this.props.selectTeam();
-            this.props.fetchVideos();
+            this.props.fetchVideos({selectedGameday: this.props.selectedGameday, selectedTeam: this.props.selectedTeam, selectedVideo: this.props.selectVideo});
           }}>
           <div className="wrap">
             <img src={team.image}/>
@@ -36,7 +36,7 @@ class TeamList extends Component {
           key={team.id}
           onClick={() => {
             this.props.selectTeam(team);
-            this.props.fetchVideos();
+            this.props.fetchVideos({selectedGameday: this.props.selectedGameday, selectedTeam: team, selectedVideo: this.props.selectVideo});
           }}>
           <div className="wrap">
             <img src={team.image}/>
@@ -82,7 +82,9 @@ class TeamList extends Component {
 function mapStateToProps(state){
   return {
     teams: state.teams,
-    selectedTeam: state.selectedTeam
+    selectedGameday: state.selectedGameday,
+    selectedTeam: state.selectedTeam,
+    selectedVideo: state.selectedVideo
   };
 }
 

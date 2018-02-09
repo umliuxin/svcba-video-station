@@ -24,7 +24,6 @@ class SelectedVideo extends Component {
     if (!this.props.video){
       return '';
     }
-    console.log(this.props.video)
     return (
       <div className="c_video-detail">
         <div className="container">

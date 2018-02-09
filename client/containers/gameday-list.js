@@ -10,7 +10,7 @@ class GamedayList extends Component {
       return (
         <div className="c_gameday-item active" key={gameday} onClick= {()=> {
           this.props.selectGameday();
-          this.props.fetchVideos();
+          this.props.fetchVideos({selectedGameday: this.props.selectedGameday, selectedTeam: this.props.selectedTeam, selectedVideo: this.props.selectVideo});
         }}>
           <button className="btn">
               <strong>{gameday}</strong>
@@ -21,7 +21,7 @@ class GamedayList extends Component {
       return (
         <div className="c_gameday-item" key={gameday} onClick= {()=> {
           this.props.selectGameday(gameday);
-          this.props.fetchVideos();
+          this.props.fetchVideos({selectedGameday: gameday, selectedTeam: this.props.selectedTeam, selectedVideo: this.props.selectVideo});
         }}>
           <button className="btn">
               {gameday}
@@ -54,7 +54,9 @@ class GamedayList extends Component {
 function mapStateToProps(state){
   return {
     gamedays: state.gamedays,
-    selectedGameday: state.selectedGameday
+    selectedGameday: state.selectedGameday,
+    selectedTeam: state.selectedTeam,
+    selectedVideo: state.selectedVideo
   };
 }
 
