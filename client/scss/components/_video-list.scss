@@ -1,6 +1,10 @@
 .c_video-list{
+  .comp-title{
+    float: left;
+  }
   .applied-filter{
-    margin-bottom: 24px;
+    float: right;
+    padding: 20px 0;
   }
   .applied-item{
     padding: 8px 32px 8px 16px;
@@ -15,6 +19,12 @@
       position: absolute;
       right: 8px;
     }
+  }
+  .recommended-list{
+    padding: 16px 32px;
+    border-radius: 12px;
+    background-color: $gray-lighter;
+    margin-top: 16px;
   }
 }
 

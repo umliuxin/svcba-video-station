@@ -8,3 +8,12 @@ export function fetchTeamLogo(team) {
     return defaultLogo;
   }
 }
+
+
+export function scrollToTop() {
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'
+  });
+}

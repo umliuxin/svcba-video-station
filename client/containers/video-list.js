@@ -3,12 +3,19 @@ import { connect } from 'react-redux';
 import { selectVideo, fetchVideos, selectTeam, selectGameday } from '../actions';
 import { bindActionCreators } from 'redux';
 
-import { fetchTeamLogo } from '../utility';
+import { fetchTeamLogo, scrollToTop } from '../utility';
 
 class VideoList extends Component {
 
   componentDidMount(){
-    this.props.fetchVideos({indexVideos: true});
+    this.props.fetchVideos();
+  }
+  componentWillUpdate(nextProps, prevState){
+    if (Array.isArray(nextProps.videos) && nextProps.videos.length == 1){
+      this.props.selectVideo(nextProps.videos[0]);
+      this.props.fetchVideos({selectedVideo: nextProps.videos[0]});
+      scrollToTop();
+    }
   }
   renderItem(video) {
     return (
@@ -17,7 +24,8 @@ class VideoList extends Component {
         key={video.id}
         onClick={() => {
           this.props.selectVideo(video);
-          this.props.fetchVideos({selectedVideo: video})
+          this.props.fetchVideos({selectedVideo: video});
+          scrollToTop();
         }}>
         <div className="item-wrap">
           <div className="image-wrap">
@@ -28,7 +36,7 @@ class VideoList extends Component {
               <img src={fetchTeamLogo(video.team_2)}/>
             </div>
           </div>
-          <div>{video.team_1} vs {video.team_2}</div>
+          <div className="truncate">{video.team_1} vs {video.team_2}</div>
           <div>{video.game_day}</div>
 
         </div>
@@ -36,9 +44,14 @@ class VideoList extends Component {
     );
   }
   renderList(videos) {
-    return videos.map((video) => {
-      return this.renderItem(video);
-    });
+    if (videos && videos.length > 0) {
+      return videos.map((video) => {
+        return this.renderItem(video);
+      });
+    } else {
+      return (<div className="col-sm-12">Sorry, no video found!</div>);
+    }
+
   }
 
   renderTitle() {
@@ -96,34 +109,36 @@ class VideoList extends Component {
   }
 
 
-  renderRecommend() {
-    return (
-      <div className="container">
-        <h4>Other games from {this.props.videos.team_1_name}</h4>
-        <div className="row">
-          {this.renderList(this.props.videos.team_1_videos)}
+  renderRecommend(name, videos) {
+    if (videos && videos.length > 0) {
+      return (
+        <div className="recommended-list">
+          <h4>Other games from {name}</h4>
+          <div className="row">
+            {this.renderList(videos.filter( video => {
+              return video.youtube_id !== this.props.selectedVideo.youtube_id
+            }))}
+          </div>
         </div>
-        <h4>Other games from {this.props.videos.team_2_name}</h4>
-        <div className="row">
-          {this.renderList(this.props.videos.team_2_videos)}
-        </div>
-        <h4>Other games from {this.props.videos.game_day_name}</h4>
-        <div className="row">
-          {this.renderList(this.props.videos.game_day_videos)}
-        </div>
-      </div>
-    );
+      );
+    } else {
+      return '';
+    }
+
   }
 
   render() {
     if (this.props.videos){
+      // General video list
       if(Array.isArray(this.props.videos)) {
         return (
           <div className="c_video-list">
             <div className="container">
-              <h2 className="comp-title">{this.renderTitle()}</h2>
-              <div className="applied-filter">
-                {this.renderApplied()}
+              <div className="clearfix">
+                <h2 className="comp-title">{this.renderTitle()}</h2>
+                <div className="applied-filter">
+                  {this.renderApplied()}
+                </div>
               </div>
               <div className="row">
                 {this.renderList(this.props.videos)}
@@ -132,9 +147,14 @@ class VideoList extends Component {
           </div>
         );
       } else {
+        // Recommended Section
         return (
           <div className="c_video-list">
-            {this.renderRecommend()}
+            <div className="container">
+              {this.renderRecommend(this.props.videos.team_1_name ,this.props.videos.team_1_videos)}
+              {this.renderRecommend(this.props.videos.team_2_name ,this.props.videos.team_2_videos)}
+              {this.renderRecommend(this.props.videos.game_day_name ,this.props.videos.game_day_videos)}
+            </div>
           </div>
         );
       }
@@ -143,11 +163,9 @@ class VideoList extends Component {
         <div className="text-center">
           Loading
         </div>
-      )
+      );
     }
-
   }
-
 }
 
 

@@ -7,7 +7,7 @@ export const TEAM_LIST = {
   "Goat":{"name":"Goat","id":5,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1008323/75/75/c/1467331673.jpg", "group": "men"},
   "ILG":{"name":"ILG","id":6,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1003010/75/75/c/1441188936.jpg", "group": "men"},
   "MLB":{"name":"MLB","id":7,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1008291/75/75/c/1466900917.jpg", "group": "men"},
-  "NK Infernal":{"name":"NK Infernal","id":8,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1007002/75/75/c/1504763562.jpg", "group": "men"},
+  "Infernal":{"name":"Infernal","id":8,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1007002/75/75/c/1504763562.jpg", "group": "men"},
   "豪威":{"name":"豪威","id":9,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1010089/75/75/c/1504762386.JPG", "group": "men"},
   "Pandas":{"name":"Pandas","id":10,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1010218/75/75/c/1504763785.png", "group": "men"},
   "Pegasi":{"name":"Pegasi","id":11,"image":"http://d31217d8r00rg3.cloudfront.net/thumb/team/logo/1008328/75/75/c/1470085399.gif", "group": "men"},

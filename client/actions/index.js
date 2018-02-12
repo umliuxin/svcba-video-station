@@ -42,12 +42,10 @@ export function fetchVideo(vid){
   }
 }
 
-export function fetchVideos({selectedGameday, selectedTeam, selectedVideo, indexVideos}){
+export function fetchVideos({selectedGameday, selectedTeam, selectedVideo, indexVideos} = {}){
   const state = store.getState();
   let requestUrl = API_URL;
-  if (indexVideos){
-    requestUrl = `${requestUrl}&limit=15`;
-  } else if (selectedVideo) {
+  if (selectedVideo) {
     requestUrl = `${requestUrl}&recommend=true&team_1=${selectedVideo.team_1}&team_2=${selectedVideo.team_2}&game_day=${selectedVideo.game_day}&limit=6`;
   } else {
     if (selectedGameday){
@@ -56,6 +54,10 @@ export function fetchVideos({selectedGameday, selectedTeam, selectedVideo, index
     if (selectedTeam){
       requestUrl = `${requestUrl}&team=${selectedTeam.name}`;
     }
+  }
+
+  if (requestUrl === API_URL) {
+    requestUrl = `${requestUrl}&limit=12`
   }
 
   var request;

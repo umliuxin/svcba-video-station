@@ -4,6 +4,8 @@ import { selectTeam, fetchVideos } from '../actions';
 import { bindActionCreators } from 'redux';
 
 import { GROUP_MEN, GROUP_WOMEN } from '../constants/constants';
+import { scrollToTop } from '../utility';
+
 
 class TeamList extends Component {
   constructor(props){
@@ -20,6 +22,7 @@ class TeamList extends Component {
           className="c_team-list-item col-sm-2 active"
           key={team.id}
           onClick={() => {
+            scrollToTop();
             this.props.selectTeam();
             this.props.fetchVideos({selectedGameday: this.props.selectedGameday, selectedTeam: this.props.selectedTeam, selectedVideo: this.props.selectVideo});
           }}>
@@ -35,6 +38,7 @@ class TeamList extends Component {
           className="c_team-list-item col-sm-2"
           key={team.id}
           onClick={() => {
+            scrollToTop();
             this.props.selectTeam(team);
             this.props.fetchVideos({selectedGameday: this.props.selectedGameday, selectedTeam: team, selectedVideo: this.props.selectVideo});
           }}>
@@ -63,12 +67,11 @@ class TeamList extends Component {
     return (
       <div className='c_team-list'>
         <div className='container'>
-          <h2 className="comp-title">Filter by team</h2>
-          <h4> MEN Group</h4>
+          <h2 className="comp-title">Teams</h2>
           <div className="row">
             {this.renderList(GROUP_MEN)}
           </div>
-          <h4>Women Group</h4>
+          <h4>Women SVCBA</h4>
           <div className="row">
             {this.renderList(GROUP_WOMEN)}
           </div>

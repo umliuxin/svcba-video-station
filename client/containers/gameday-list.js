@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { selectGameday, fetchVideos } from '../actions';
 import { bindActionCreators } from 'redux';
+import { scrollToTop } from '../utility';
+
 
 class GamedayList extends Component {
 
@@ -9,6 +11,7 @@ class GamedayList extends Component {
     if (isActive){
       return (
         <div className="c_gameday-item active" key={gameday} onClick= {()=> {
+          scrollToTop();
           this.props.selectGameday();
           this.props.fetchVideos({selectedGameday: this.props.selectedGameday, selectedTeam: this.props.selectedTeam, selectedVideo: this.props.selectVideo});
         }}>
@@ -20,6 +23,7 @@ class GamedayList extends Component {
     } else {
       return (
         <div className="c_gameday-item" key={gameday} onClick= {()=> {
+          scrollToTop();
           this.props.selectGameday(gameday);
           this.props.fetchVideos({selectedGameday: gameday, selectedTeam: this.props.selectedTeam, selectedVideo: this.props.selectVideo});
         }}>
@@ -43,7 +47,7 @@ class GamedayList extends Component {
     return(
       <div className="c_gameday-list">
         <div className='container'>
-          <h2 className="comp-title">Filter by game day</h2>
+          <h2 className="comp-title">Gamedays</h2>
           {this.renderList()}
         </div>
       </div>
