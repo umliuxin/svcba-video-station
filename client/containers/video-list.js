@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectVideo, fetchVideos, selectTeam, selectGameday } from '../actions';
+import { selectVideo, fetchVideos, selectTeam, selectGameday, showShareLink } from '../actions';
 import { bindActionCreators } from 'redux';
 
-import { fetchTeamLogo, scrollToTop } from '../utility';
+import { fetchTeamLogo, scrollToTop, getTeamByTeam } from '../utility';
 
 class VideoList extends Component {
 
   componentDidMount(){
-    this.props.fetchVideos();
+    if (window.location.search && window.location.search.includes('?t=')){
+      let name = window.location.search.slice(3),
+          team = getTeamByTeam(name);
+      this.props.selectTeam(team);
+      this.props.fetchVideos({selectedTeam: team});
+    } else if (window.location.search && window.location.search.includes('?d=')){
+      let gameday = window.location.search.slice(3);
+      this.props.selectGameday(gameday);
+      this.props.fetchVideos({selectedGameday: gameday});
+    } else {
+      this.props.fetchVideos();
+    }
   }
   componentWillUpdate(nextProps, prevState){
     if (Array.isArray(nextProps.videos) && nextProps.videos.length == 1){
@@ -91,17 +102,27 @@ class VideoList extends Component {
       );
     } else if (this.props.selectedTeam) {
       return (
-        <div className="applied-item" onClick = {()=>{
-            this.props.selectTeam();
-            this.props.fetchVideos({selectedGameday: this.props.selectedGameday, selectedTeam: null});
-          }}>{this.props.selectedTeam.name}</div>
+        <div>
+          <div className="applied-item" onClick = {()=>{
+              this.props.selectTeam();
+              this.props.fetchVideos({selectedGameday: this.props.selectedGameday, selectedTeam: null});
+            }}>{this.props.selectedTeam.name}</div>
+          <div className="btn btn-primary" onClick={() => {
+              this.props.showShareLink(true);
+            }}>Share</div>
+        </div>
       );
     } else if (this.props.selectedGameday) {
       return (
-        <div className="applied-item" onClick = {()=>{
-            this.props.selectGameday();
-            this.props.fetchVideos({selectedGameday: null, selectedTeam: this.props.selectedTeam});
-          }}>{this.props.selectedGameday}</div>
+        <div>
+          <div className="applied-item" onClick = {()=>{
+              this.props.selectGameday();
+              this.props.fetchVideos({selectedGameday: null, selectedTeam: this.props.selectedTeam});
+            }}>{this.props.selectedGameday}</div>
+          <div className="btn btn-primary" onClick={() => {
+              this.props.showShareLink(true);
+            }}>Share</div>
+        </div>
       );
     } else {
       return '';
@@ -179,7 +200,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators( {selectVideo, fetchVideos, selectTeam, selectGameday}, dispatch);
+  return bindActionCreators( {selectVideo, fetchVideos, selectTeam, selectGameday, showShareLink}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoList);

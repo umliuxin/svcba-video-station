@@ -17,3 +17,11 @@ export function scrollToTop() {
     behavior: 'smooth'
   });
 }
+
+export function getTeamByTeam(name) {
+  name = decodeURIComponent(name);
+  if ( name in TEAM_LIST)
+    return TEAM_LIST[name];
+  else
+    return null;
+}

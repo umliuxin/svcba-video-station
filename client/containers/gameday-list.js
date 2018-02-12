@@ -6,7 +6,6 @@ import { scrollToTop } from '../utility';
 
 
 class GamedayList extends Component {
-
   renderListItem(gameday, isActive) {
     if (isActive){
       return (

@@ -15,10 +15,16 @@ class ShareLink extends Component {
     if (!this.props.showShare){
       return '';
     }
-    if (!this.props.video){
+    let shareUrl;
+    if (this.props.video){
+      shareUrl = `${window.location.origin}?v=${this.props.video.youtube_id}`;
+    } else if (this.props.team){
+      shareUrl = `${window.location.origin}?t=${this.props.team.name}`;
+    } else if (this.props.day){
+      shareUrl = `${window.location.origin}?d=${this.props.day}`;
+    } else{
       return <div>No Link</div>;
     }
-    const shareUrl = `${window.location.origin}?v=${this.props.video.youtube_id}`;
     return (
       <div className="c_share-link">
         <input className="share-link" id="js-share-link" value={shareUrl} readOnly/>
@@ -42,6 +48,8 @@ class ShareLink extends Component {
 function mapStateToProps(state) {
   return {
     video: state.selectedVideo,
+    team: state.selectedTeam,
+    day: state.selectedGameday,
     showShare: state.showShare
   };
 }
