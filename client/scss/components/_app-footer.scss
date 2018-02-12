@@ -1,3 +1,13 @@
 .c_app-footer{
-  border: 1px solid #999;
+  border-top: 1px solid $gray;
+  height: 60px;
+  background-color: $brand-primary;
+  font-size: $font-size-sm;
+  color: $white;
+  padding-top: 8px;
+  margin-top: 50px;
+  a{
+    color: $white;
+    margin-right: 15px;
+  }
 }

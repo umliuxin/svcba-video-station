@@ -1,0 +1,10 @@
+// CSS HELPER
+.text-center{
+  text-align: center;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

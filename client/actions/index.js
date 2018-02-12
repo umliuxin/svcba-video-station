@@ -1,4 +1,10 @@
-import { SELECT_VIDEO_ACTION, SELECT_TEAM_ACTION, SELECT_GAMEDAY_ACTION, FETCH_VIDEOS_ACTION, FETCH_VIDEO_ACTION } from '../constants/actions';
+import {
+  SELECT_VIDEO_ACTION,
+  SELECT_TEAM_ACTION,
+  SELECT_GAMEDAY_ACTION,
+  FETCH_VIDEOS_ACTION,
+  FETCH_VIDEO_ACTION,
+  SHOW_SHARE_ACTION } from '../constants/actions';
 
 import { API_URL } from '../constants/constants';
 
@@ -36,18 +42,24 @@ export function fetchVideo(vid){
   }
 }
 
-export function fetchVideos(){
-  const state = store.getState()
+export function fetchVideos({selectedGameday, selectedTeam, selectedVideo, indexVideos} = {}){
+  const state = store.getState();
   let requestUrl = API_URL;
-  if (state.selectedGameday){
-    requestUrl = `${requestUrl}&game_day=${state.selectedGameday}`;
+  if (selectedVideo) {
+    requestUrl = `${requestUrl}&recommend=true&team_1=${selectedVideo.team_1}&team_2=${selectedVideo.team_2}&game_day=${selectedVideo.game_day}&limit=6`;
+  } else {
+    if (selectedGameday){
+      requestUrl = `${requestUrl}&game_day=${selectedGameday}`;
+    }
+    if (selectedTeam){
+      requestUrl = `${requestUrl}&team=${selectedTeam.name}`;
+    }
   }
-  if (state.selectedTeam){
-    requestUrl = `${requestUrl}&team=${state.selectedTeam.name}`;
+
+  if (requestUrl === API_URL) {
+    requestUrl = `${requestUrl}&limit=12`
   }
-  if (requestUrl == API_URL){
-    requestUrl = `${requestUrl}&limit=15`;
-  }
+
   var request;
   if (state['videoPromises'][requestUrl]){
     request = state['videoPromises'][requestUrl];
@@ -57,5 +69,12 @@ export function fetchVideos(){
   return {
     type: FETCH_VIDEOS_ACTION,
     payload: request
+  }
+}
+
+export function showShareLink(bool){
+  return {
+    type: SHOW_SHARE_ACTION,
+    payload: bool
   }
 }

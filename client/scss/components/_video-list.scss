@@ -1,0 +1,75 @@
+.c_video-list{
+  .comp-title{
+    float: left;
+  }
+  .applied-filter{
+    float: right;
+    padding: 20px 0;
+  }
+  .applied-item{
+    padding: 8px 32px 8px 16px;
+    border-radius: 4px;
+    border: 1px solid $gray-lighter;
+    display: inline-block;
+    position: relative;
+    margin-right: 8px;
+    cursor: pointer;
+    &:after{
+      content: 'x';
+      position: absolute;
+      right: 8px;
+    }
+  }
+  .recommended-list{
+    padding: 16px 32px;
+    border-radius: 12px;
+    background-color: $gray-lighter;
+    margin-top: 16px;
+  }
+}
+
+
+.c_video-list-item{
+  padding: 0 10px;
+  .item-wrap{
+    background-color: $gray-lighter;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  }
+  .image-wrap{
+    width: 100%;
+    padding-bottom: 45%;
+    height: 0;
+    position: relative;
+  }
+  .team-1-logo, .team-2-logo {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    z-index: 1;
+    top: 0;
+    overflow: hidden;
+    background-color: #fff;
+
+    img{
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+  }
+  .team-1-logo{
+    left: 0;
+    border-top-left-radius: 8px;
+  }
+
+  .team-2-logo{
+    right: 0;
+    border-top-right-radius: 8px;
+  }
+}
