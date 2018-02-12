@@ -24,7 +24,7 @@ class VideoList extends Component {
   renderItem(video) {
     return (
       <div
-        className='c_video-list-item col-sm-3'
+        className='c_video-list-item col-sm-6 col-md-4 col-lg-3'
         key={video.id}
         onClick={() => {
           this.props.selectVideo(video);
@@ -124,7 +124,6 @@ class VideoList extends Component {
 
 
   renderRecommend(name, videos) {
-    console.log(this.props.selectedVideo)
     if (videos && videos.length > 0) {
       return (
         <div className="recommended-list">

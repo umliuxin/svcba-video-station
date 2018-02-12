@@ -37,6 +37,7 @@ class GamedayList extends Component {
   renderList() {
     if (!this.props.gamedays){ return; }
     return this.props.gamedays
+      .sort().reverse()
       .map((gameday) => {
         return this.renderListItem(gameday, this.props.selectedGameday === gameday);
       });
@@ -47,7 +48,9 @@ class GamedayList extends Component {
       <div className="c_gameday-list">
         <div className='container'>
           <h2 className="comp-title">Gamedays</h2>
-          {this.renderList()}
+          <div className="gameday-wrap">
+            {this.renderList()}
+          </div>
         </div>
       </div>
     );

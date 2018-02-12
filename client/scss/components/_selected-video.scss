@@ -28,7 +28,7 @@
     .team-name{
       position: absolute;
       top: 50%;
-      font-size: 50px;
+      font-size: 36px;
       color: #fff;
       z-index: 2;
       text-shadow: 1px 1px #999;
@@ -63,6 +63,14 @@
   }
   .embed-responsive{
     border-radius: 12px;
+  }
+  @media only screen and (max-width: 992px){
+    .video-date{
+      display: none;
+    }
+    .team-1-logo .team-name{ left: 50%; font-size: 24px;}
+    .team-2-logo .team-name{ right: 50%; font-size: 24px;}
+
   }
 }
 
