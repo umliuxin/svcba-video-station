@@ -35,7 +35,7 @@ class TeamList extends Component {
     } else {
       return (
         <div
-          className="c_team-list-item col-sm-2"
+          className="c_team-list-item col-4 col-sm-3 col-lg-2"
           key={team.id}
           onClick={() => {
             scrollToTop();
