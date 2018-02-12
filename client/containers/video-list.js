@@ -21,13 +21,6 @@ class VideoList extends Component {
       this.props.fetchVideos();
     }
   }
-  componentWillUpdate(nextProps, prevState){
-    if (Array.isArray(nextProps.videos) && nextProps.videos.length == 1){
-      this.props.selectVideo(nextProps.videos[0]);
-      this.props.fetchVideos({selectedVideo: nextProps.videos[0]});
-      scrollToTop();
-    }
-  }
   renderItem(video) {
     return (
       <div
@@ -131,6 +124,7 @@ class VideoList extends Component {
 
 
   renderRecommend(name, videos) {
+    console.log(this.props.selectedVideo)
     if (videos && videos.length > 0) {
       return (
         <div className="recommended-list">
@@ -167,7 +161,7 @@ class VideoList extends Component {
             </div>
           </div>
         );
-      } else {
+      } else if (this.props.selectedVideo) {
         // Recommended Section
         return (
           <div className="c_video-list">
@@ -178,6 +172,8 @@ class VideoList extends Component {
             </div>
           </div>
         );
+      } else {
+        return '';
       }
     } else {
       return (
