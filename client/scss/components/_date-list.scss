@@ -1,11 +1,12 @@
 .c_gameday-item{
-  padding: 18px 32px 48px;
+  padding: 18px 36px 48px;
   display: inline-block;
   text-align: center;
   background-image: url("../../images/gameday-bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   margin-right: 12px;
+  margin-bottom: 16px;
   border-radius: 6px;
   cursor: pointer;
 
@@ -23,7 +24,9 @@
 }
 
 .c_gameday-list{
-  .selected-row{
-    margin-bottom: 24px;
+  .gameday-wrap{
+    overflow: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
   }
 }
