@@ -124,7 +124,6 @@ class VideoList extends Component {
 
 
   renderRecommend(name, videos) {
-    console.log(this.props.selectedVideo)
     if (videos && videos.length > 0) {
       return (
         <div className="recommended-list">
