@@ -10,7 +10,7 @@ import App from './components/App.js';
 require( './scss/application.scss');
 
 ReactDOM.render(
-<Provider store={store}>
-  <App />
-</Provider>
+  <Provider store={store}>
+    <App />
+  </Provider>
   , document.getElementById('root'));
