@@ -4,7 +4,7 @@
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const PATH = {
   SRC: 'client',
@@ -25,10 +25,18 @@ module.exports = {
     filename: `${PATH.DIST}/app_bundle.js`
   },
   module: {
-    loaders: [
+    rules: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader', 'resolve-url-loader','sass-loader?sourceMap'])},
+      {
+        test: /\.scss$/, use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+          'resolve-url-loader',
+          'sass-loader?sourceMap'
+        ]
+      },  
       {
         test: /\.(jpg|png|svg)$/,
         use: {
@@ -42,7 +50,7 @@ module.exports = {
   },
   plugins: [
     HtmlWebpackPluginConfig,
-    new ExtractTextPlugin(`${PATH.DIST}/style.bundle.css`)
+    new MiniCssExtractPlugin({ filename: `${PATH.DIST}/style.bundle.css`})
   ]
 
 }
